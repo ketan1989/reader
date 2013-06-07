@@ -22,6 +22,7 @@ class UsersController < ApplicationController
     if !@user.is_admin?
       redirect_to user_path(current_user)
     end
+    @total_history = @user.feed_entries_count('h' , nil)
     @delayedjobs = DelayedJob.page(params[:page]).per(50)
   end
   
@@ -59,12 +60,14 @@ class UsersController < ApplicationController
     
   def edit
     @menu = "set"
+    @total_history = @user.feed_entries_count('h' , nil)
   end
   
   def update
     if @user.update_attributes(params[:user])
       redirect_to @user, flash: {notice: t("updation.success")}
     else
+      @total_history = @user.feed_entries_count('h' , nil)
       render action: "edit" 
     end
     @menu = "set"
