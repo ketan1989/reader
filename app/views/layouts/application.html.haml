@@ -28,10 +28,13 @@
         .span3.right
           - if !current_user.blank?
             - if current_user.is_admin?
-              = link_to "Admin", admin_user_path(current_user)
+              = link_to "Admin", admin_user_path(current_user), class: "red"
               &nbsp;&nbsp;
-              = link_to "Jobs", job_user_path(current_user)
+              = link_to "Jobs", job_user_path(current_user), class: "red"
               &nbsp;&nbsp;
+            %br
+            = link_to "History (#{@total_history})", user_path(current_user, :h => true), style: "color: black;"
+            &nbsp;&nbsp;
             = link_to "Settings".html_safe, edit_user_path(current_user), style: "color: black;"
             &nbsp;&nbsp;
             = link_to "Sign Out".html_safe, sign_out_path, style: "color: black;"
@@ -43,8 +46,8 @@
     .container
       .row
         .span12= render partial: "layouts/shared/messages"
-        = yield
+      = yield
       - if !current_user.blank?
-        = render partial: "layouts/shared/footer"
+        .row= render partial: "layouts/shared/footer"
 - if current_user.blank?
   = render partial: "layouts/ga"

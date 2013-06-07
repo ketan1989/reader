@@ -1,35 +1,47 @@
-.span5{style: "height: 450px;"}
-  %br
-  %br
-  .main-tag A clean, no bullshit Google Reader replacement
-  %br
-  %h3.thin 
-    Import and save all your Google Reader 
+.row
+  .span5{style: "height: 450px;"}
     %br
-    subscriptions in one simple click!   
-  %br
-  %br
-  %br
-  = link_to image_tag("g2.png"), "/auth/google_oauth2"
-  %br
-.span1{style: "height: 450px;"}
-  %br
-.span6{style: "height: 450px;"}
-  %h3.red
-    = number_to_human(FeedEntry.count)
-    = "articles delivered since launch (#{(Time.now.to_date - Date.new(2013, 6, 3)).to_i.to_s} days ago)"
-  = image_tag "home.png"
-.span4
-  .well
-    %h3 Open source
-    Community owned and community developed.
-    = link_to "Github", "https://github.com/pykih/reader", target: "_blank"
-.span4
-  .well
-    %h3 Save your feeds
-    Easily import your Google Reader subscriptions
-.span4
-  .well
-    %h3 Manage your reading list
-    Native support for favorites & read later
+    %br
+    .main-tag A clean, no bullshit Google Reader replacement
+    %br
+    %h3.thin 
+      Import and save all your Google Reader 
+      %br
+      subscriptions in one simple click!   
+    %br
+    %br
+    %br
+    = link_to image_tag("g2.png"), "/auth/google_oauth2"
+    %br
+  .span1{style: "height: 450px;"}
+    %br
+  .span6{style: "height: 450px;"}
+    %h3.red
+      = number_to_human(FeedEntry.count)
+      = "articles delivered since launch (#{(Time.now.to_date - Date.new(2013, 6, 3)).to_i.to_s} days ago)"
+    = image_tag "home.png"
+.row
+  .span4
+    .well
+      %h3 Back-up
+      Google Reader will shut down on July 1, 2013. Before that, back-up your subscriptions and folders on pykih reader.
+  .span4
+    .well
+      %h3 Open source
+      pykih reader is community owned and community developed on 
+      = link_to "Github.", "https://github.com/pykih/reader", target: "_blank"
+      Want more features? Develop it. Want a custom deployment? Feel free to deploy it.
+  .span4
+    .well
+      %h3{style: "padding-bottom: 10px;"} Flag important articles
+      = image_tag "stars.png"
+.row      
+  .span4
+    .well
+      %h3 Read Later
+      Come across an article and want to read it later? Simply click on the spectacles icon and later retrive the articles from the TO READ Folder.
+  .span8
+    %br
 %br
+%br
+%br    
