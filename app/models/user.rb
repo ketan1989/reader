@@ -15,7 +15,9 @@ class User < ActiveRecord::Base
   
   #ASSOCIATIONS
   #has_many :app_key_users        , :dependent => :destroy
-  has_many :app_keys#, through: :app_key_users
+  #has_many :app_keys             , through: :app_key_users
+  #has_many :feed_entry_users     , :dependent => :destroy
+  has_many :app_keys#
   has_one :authentication   , :dependent => :destroy
   has_many :tags, :dependent => :destroy
   

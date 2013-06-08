@@ -14,7 +14,7 @@ class FeedEntryUser < ActiveRecord::Base
   belongs_to :app_key_user
   
   #VALIDATIONS
-  validates :app_key_id, presence: true
+  validates :feed_entry_id, presence: true
   validates :user_id, presence: true
   validates :app_key_user_id, presence: true
   
@@ -26,16 +26,40 @@ class FeedEntryUser < ActiveRecord::Base
   scope :star,    where(is_star: true)
   
   #CUSTOM SCOPES  
-  def self.by_user(u)
-    where("app_key_id IN (?)", u.app_key_ids)
-  end
-  
   #OTHER METHODS
   
-  def self.create_and_save(akid, akuid, uid, feid, is_s, is_t_r, l_c_o, cat, l_s_at, c_s)
+  def guid
+    self.feed_entry.guid
+  end
+  
+  def name
+    self.feed_entry.name
+  end
+  
+  def published_at
+    self.feed_entry.published_at
+  end
+  
+  def summary
+    self.feed_entry.summary
+  end
+  
+  def url
+    self.feed_entry.url
+  end
+  
+  def author
+    self.feed_entry.author
+  end
+  
+  def content
+    self.feed_entry.content
+  end
+  
+  def self.create_and_save(akuid, uid, feid, is_s, is_t_r, l_c_o, cat, l_s_at, c_s)
     f = FeedEntryUser.where(user_id: uid, feed_entry_id: feid, app_key_user_id: akuid).first
     if f.blank?
-      f = FeedEntryUser.new(user_id: uid, feed_entry_id: feid, app_key_user_id: akuid).first
+      f = FeedEntryUser.new(user_id: uid, feed_entry_id: feid, app_key_user_id: akuid)
     end
     f.categories = cat
     f.current_star = c_s 
