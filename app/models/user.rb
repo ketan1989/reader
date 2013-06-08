@@ -14,7 +14,8 @@ class User < ActiveRecord::Base
   attr_accessor :incoming_channel
   
   #ASSOCIATIONS
-  has_many :app_keys        , :dependent => :destroy
+  has_many :app_key_users        , :dependent => :destroy
+  has_many :app_keys, through: :app_key_users
   has_one :authentication   , :dependent => :destroy
   has_many :tags, :dependent => :destroy
   
