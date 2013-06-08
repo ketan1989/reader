@@ -20,6 +20,17 @@ class AppKeyUser < ActiveRecord::Base
     end
   end
   
+  def self.create_and_save(akid, uid, col, cat)
+    a = AppKeyUser.where(app_key_id: akid, user_id: uid).first
+    if a.blank?
+      a = AppKey.new(app_key_id: akid, user_id: uid)
+    end
+    a.colour = a.colour
+    a.categories = a.categories
+    a.save
+    return a
+  end
+  
   #JOBS
   #PRIVATE
   private

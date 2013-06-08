@@ -11,13 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130607183132) do
+ActiveRecord::Schema.define(:version => 20130608085245) do
 
   create_table "app_key_users", :force => true do |t|
     t.integer  "user_id"
     t.integer  "app_key_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "colour"
+    t.text     "categories"
   end
 
   create_table "app_keys", :force => true do |t|
@@ -104,6 +106,20 @@ ActiveRecord::Schema.define(:version => 20130607183132) do
     t.text     "content"
     t.string   "current_star",    :default => "star0"
     t.datetime "last_starred_at"
+  end
+
+  create_table "feed_entry_users", :force => true do |t|
+    t.integer  "feed_entry_id"
+    t.integer  "user_id"
+    t.boolean  "is_star"
+    t.boolean  "is_to_read"
+    t.datetime "last_clicked_on"
+    t.text     "categories"
+    t.datetime "last_starred_at"
+    t.string   "current_star"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "app_key_user_id"
   end
 
   create_table "tag_entries", :force => true do |t|
