@@ -40,6 +40,10 @@ module RedFeed
     # Set preference in multi-part emails
     config.action_mailer.default :parts_order => [ "text/html", "text/plain", "text/enriched" ]
 
+    #------ TESTING because of TIMEOUT issue 
+    config.assets.initialize_on_precompile = false
+    #------ TESTING because of TIMEOUT issue 
+
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
