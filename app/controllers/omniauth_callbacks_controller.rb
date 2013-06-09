@@ -21,11 +21,11 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     sign_in_and_redirect user
     
     if flag_existing_user
-      user.app_keys.each do |ak|
-        Delayed::Job.enqueue Dj1.new(ak.id, false)
+      user.my_feeds.each do |ak|
+        Delayed::Job.enqueue Job::Dj1.new(ak.feed.id)
       end
     else
-      Delayed::Job.enqueue Dj4.new(user.id)
+      Delayed::Job.enqueue Job::Dj4.new(user.id)
     end 
   end
 

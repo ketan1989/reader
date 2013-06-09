@@ -7,10 +7,13 @@ class Tag < ActiveRecord::Base
   #ASSOCIATIONS
   belongs_to :user
   has_many :tag_entries
-  has_many :app_keys, through: :tag_entries
+  has_many :my_feeds, through: :tag_entries
   
   #NESTED 
   #VALIDATIONS
+  validates :user_id, presence: true
+  validates :name, presence: true
+  
   #CALLBACKS  
   #SCOPES  
   #OTHER METHODS

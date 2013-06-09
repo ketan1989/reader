@@ -14,12 +14,10 @@ class User < ActiveRecord::Base
   attr_accessor :incoming_channel
   
   #ASSOCIATIONS
-  #has_many :app_key_users        , :dependent => :destroy
-  #has_many :app_keys             , through: :app_key_users
-  #has_many :feed_entry_users     , :dependent => :destroy
-  has_many :app_keys#
-  has_one :authentication   , :dependent => :destroy
-  has_many :tags, :dependent => :destroy
+  has_many :my_feeds        , :dependent => :destroy
+  has_many :my_entries
+  has_one  :authentication       , :dependent => :destroy
+  has_many :tags                 , :dependent => :destroy
   
   #NESTED 
   #VALIDATIONS
@@ -52,21 +50,17 @@ class User < ActiveRecord::Base
     (email == "rp@pykih.com" or email == "ritvij.j@gmail.com" or email == "modimihir@gmail.com") ? true : false
   end
   
-  def app_key_ids
-    self.app_keys.pluck("app_keys.id")
-  end
-  
-  def feed_entries_count(g, akid)
+  def entries_count(g, akid)
      if g == "h"
-       return FeedEntry.read.by_user(self).count.to_s
+       return MyEntry.read.by_user(self).count.to_s
      elsif g == "r"
-       return FeedEntry.to_read.by_user(self).count.to_s
+       return MyEntry.to_read.by_user(self).count.to_s
      elsif g == "s"
-       return FeedEntry.star.by_user(self).count.to_s
+       return MyEntry.star.by_user(self).count.to_s
      elsif g == "a"
-       return FeedEntry.where("feed_entries.app_key_id = ?", akid).count.to_s
+       return MyEntry.where("my_entries.my_feed_id = ?", akid).count.to_s
      else
-       return FeedEntry.by_user(self).count.to_s
+       return MyEntry.by_user(self).count.to_s
      end
    end
 

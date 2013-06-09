@@ -1,10 +1,10 @@
-class FeedEntriesController < ApplicationController
+class MyEntriesController < ApplicationController
   
   before_filter :authenticate_user!, :allowed?
   
   def update_star
     if @feed_article.present?
-      current_star_index = FeedEntry::STARS.index(@feed_article.current_star)
+      current_star_index = MyEntry::STARS.index(@feed_article.current_star)
       if @feed_article.last_starred_at.blank?
         new_star_index = (current_star_index + 1) % 13 # We have total 13 star images
       elsif (Time.now - @feed_article.last_starred_at).to_i > 5 
@@ -12,7 +12,7 @@ class FeedEntriesController < ApplicationController
       else 
         new_star_index = (current_star_index + 1) % 13 # We have total 13 star images
       end
-      @feed_article.update_attributes(current_star: FeedEntry::STARS[new_star_index], last_starred_at: Time.now, is_star: (new_star_index != 0))
+      @feed_article.update_attributes(current_star: MyEntry::STARS[new_star_index], last_starred_at: Time.now, is_star: (new_star_index != 0))
     end
   end
 
@@ -40,7 +40,7 @@ class FeedEntriesController < ApplicationController
   private
   
   def allowed?
-    @feed_article = FeedEntry.find(params[:id])
+    @feed_article = MyEntry.find(params[:id])
   end
   
 end

@@ -8,6 +8,10 @@ class Authentication < ActiveRecord::Base
   belongs_to :user
 
   #VALIDATIONS
+  validates :provider , presence: true
+  validates :token , presence: true
+  validates :user_id , presence: true
+  
   #CALLBACKS
   #SCOPES
   #CUSTOM SCOPES

@@ -25,8 +25,8 @@
                   %b= d.func
                   %span.f11.gray= d.handler.gsub("--- !ruby/struct:", "")
                 %td
-                  - if !d.app_key.blank?
-                    = d.app_key.entity_name
+                  - if !d.my_feed.blank?
+                    = d.my_feed.entity_name
                 %td
                   - if !d.user.blank?
                     = d.user.name

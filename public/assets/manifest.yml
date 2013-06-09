@@ -5,6 +5,8 @@ g.png: g-7bb33740140b793762b729e56a624c2a.png
 g/index.png: g-7bb33740140b793762b729e56a624c2a.png
 g2.png: g2-bf7fa17dc5dad13f35dd8d15de704a74.png
 g2/index.png: g2-bf7fa17dc5dad13f35dd8d15de704a74.png
+github.png: github-4af8486d189f5429943b563eea6bf1b0.png
+github/index.png: github-4af8486d189f5429943b563eea6bf1b0.png
 home.png: home-ca8f7bcbdf6a0fb3f51fc119365e0525.png
 home/index.png: home-ca8f7bcbdf6a0fb3f51fc119365e0525.png
 id_card-shadow.png: id_card-shadow-7716dc190160aa4858da8e6e98f8e2b2.png
@@ -17,6 +19,8 @@ mark_read.png: mark_read-10a4d559f2e2ab0cbc6a6984dd1ebec4.png
 mark_read/index.png: mark_read-10a4d559f2e2ab0cbc6a6984dd1ebec4.png
 mark_to_read.png: mark_to_read-13edf9500322365d4623605bcea96f1d.png
 mark_to_read/index.png: mark_to_read-13edf9500322365d4623605bcea96f1d.png
+sharing.png: sharing-752024efc8405bf45de27af9a4b8047e.png
+sharing/index.png: sharing-752024efc8405bf45de27af9a4b8047e.png
 signup.png: signup-fb719b21579a9deabdecce94bd4941b3.png
 signup/index.png: signup-fb719b21579a9deabdecce94bd4941b3.png
 star.png: star-59fa8e9e31252b399e0a09932d14e61c.png
@@ -55,8 +59,8 @@ top.png: top-95f410047392b3497e8cdbd05e1fbc6d.png
 top/index.png: top-95f410047392b3497e8cdbd05e1fbc6d.png
 application.js: application-fda86a98d3a59518557ce782718e3f9d.js
 application/index.js: application-fda86a98d3a59518557ce782718e3f9d.js
-application.css: application-6446cf508425c72b80632be8ac30f242.css
-application/index.css: application-6446cf508425c72b80632be8ac30f242.css
+application.css: application-e15a5b3df07324fd77f9b9049373557f.css
+application/index.css: application-e15a5b3df07324fd77f9b9049373557f.css
 jquery.min.map: jquery.min-8b58c0fbf303b938d8e749262f7e50dd.map
 jquery/index.min.map: jquery.min-8b58c0fbf303b938d8e749262f7e50dd.map
 fontawesome-webfont.eot: fontawesome-webfont-86a6da438b901860c3a54e21f9098bf8.eot

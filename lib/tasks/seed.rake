@@ -4,7 +4,7 @@ namespace :seed do
   
   task :db => :environment do |t, args|
     puts "Seeding"
-    u = User.new(email: "rp@pykih.com", password: "xxxxxxx", name: "Super Admin", username: "admin", slug: "admin", is_paying_customer: true)
+    u = User.new(email: "ritvij.j@gmail.com", password: "xxxxxxx234", name: "Super Admin", username: "pykih123", slug: "admin", is_paying_customer: true)
     u.skip_confirmation!
     u.save
   end

@@ -13,7 +13,7 @@ module ApplicationHelper
   end
   
   def feed_name(u, r)
-    c = u.feed_entries_count('a', r.id.to_s).to_s
+    c = u.entries_count('a', r.id.to_s).to_s
     if c.to_i != 0
       return truncate(r.entity_name, :length => 25, :omission => '..').to_s + " <span style='color: gray;'>(#{c})</span>".html_safe
     else
@@ -22,12 +22,15 @@ module ApplicationHelper
   end
   
   def feed_title(f)
+    if f.blank?
+      return ""
+    end
     str = "&nbsp;&nbsp; "
-    if f.app_key.entity_name.blank?
-      i = 110 - (7)
+    if f.my_feed.entity_name.blank?
+      i = 105 - (7)
     else
-      i = 110 - (7 + f.app_key.entity_name.to_s.length)
-      str = str + "<span class='f11 gray'>#{f.app_key.entity_name}</span> &nbsp;&nbsp;&nbsp;"
+      i = 105 - (7 + f.my_feed.entity_name.to_s.length)
+      str = str + "<span class='f11 gray'>#{f.my_feed.entity_name}</span> &nbsp;&nbsp;&nbsp;"
     end
     if !f.name.blank?
       if f.is_read

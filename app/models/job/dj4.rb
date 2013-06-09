@@ -1,4 +1,4 @@
-class Dj4 < Struct.new(:uid)
+class Job::Dj4 < Struct.new(:uid)
   
   #SIGN_UP
   
@@ -9,7 +9,7 @@ class Dj4 < Struct.new(:uid)
     Tag.import(user, a_json)
     user.reauthenticate_google?
     a_json = GRuby::Reader.subscriptions(user.token)
-    AppKey.import(user, a_json)
+    Ref::Feed.import(user, a_json)
   end
   
 end

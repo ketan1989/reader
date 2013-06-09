@@ -2,21 +2,24 @@ class TagEntry < ActiveRecord::Base
   
   #GEMS USED
   #ACCESSORS
-  attr_accessible :app_key_id, :tag_id
+  attr_accessible :my_feed_id, :tag_id
   
   #ASSOCIATIONS
-  belongs_to :app_key
+  belongs_to :my_feed
   belongs_to :tag
   
   #NESTED 
   #VALIDATIONS
+  validates :my_feed_id, presence: true
+  validates :tag_id, presence: true
+  
   #CALLBACKS  
   #SCOPES  
   #OTHER METHODS
   def self.import(akid, tgid)
-    a = TagEntry.where(app_key_id: akid, tag_id: tgid).first
+    a = TagEntry.where(my_feed_id: akid, tag_id: tgid).first
     if a.blank?
-      TagEntry.create(app_key_id: akid, tag_id: tgid)
+      TagEntry.create(my_feed_id: akid, tag_id: tgid)
     end
   end
   

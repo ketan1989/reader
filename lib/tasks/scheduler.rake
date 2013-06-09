@@ -12,8 +12,8 @@ end
 # DAILY JOBS - SEQUENCED
 task :every_day => :environment do
   begin
-    AppKey.all.each do |ak|
-      Delayed::Job.enqueue Dj1.new(ak.id, false)
+    Feed.all.each do |ak|
+      Delayed::Job.enqueue Job::Dj1.new(ak.id)
     end
   rescue Exception => e
     $stderr.puts "[JOB_ERROR] every_day " + e.to_s

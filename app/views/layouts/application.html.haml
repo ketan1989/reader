@@ -9,6 +9,8 @@
     %meta{ "http-equiv"=>"content-type", :content => "text/html; charset=ISO-8859-1"}
     %meta{name: "keywords", content: "google reader replacement, Google Reader substitute, Google Reader alternative, Google Reader"}
     %meta{name: "description", content: "pykih reader is an open source feed reader aimed at being a community owned and community developed feed reading & sharing platform."}
+    - if !current_user.blank?
+      = render partial: "layouts/sharethis"
   %body.all
     .container
       .row
@@ -23,21 +25,15 @@
           %div{style: "padding-top: 10px;"}= link_to image_tag("logo.png"), root_url
           %br
           %br
-        .span6
+        .span4
           %br
-        .span3.right
+        .span5.f11.right
           - if !current_user.blank?
-            - if current_user.is_admin?
-              = link_to "Admin", admin_user_path(current_user), class: "red"
-              &nbsp;&nbsp;
-              = link_to "Jobs", job_user_path(current_user), class: "red"
-              &nbsp;&nbsp;
-            %br
-            = link_to "History (#{@total_history})", user_path(current_user, :h => true), style: "color: black;"
-            &nbsp;&nbsp;
-            = link_to "Settings".html_safe, edit_user_path(current_user), style: "color: black;"
-            &nbsp;&nbsp;
-            = link_to "Sign Out".html_safe, sign_out_path, style: "color: black;"
+            %ul.nav.nav-pills{id: "feed_status"}
+              %li{id: "marked_to_read_feeds", class: @to_read.blank? ? nil : "active"}= link_to "To Read (#{@to_read_count})", user_path(current_user, :r => true)
+              %li{id: "starred_feeds", class: @is_star.blank? ? nil : "active"}= link_to "Stared (#{@star_count})", user_path(current_user, :s => true)
+              %li{class: @history.blank? ? nil : "active"}= link_to "History (#{@history_count})", user_path(current_user, :h => true)
+              %li= link_to "Sign Out".html_safe, sign_out_path
           - else
             %ul.nav.nav-pills
               %li{class: (action_name == "faqs") ? "active" : nil}= link_to "FAQs", faqs_path, style: "text-decoration: none;"

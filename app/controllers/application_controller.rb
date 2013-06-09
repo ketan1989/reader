@@ -9,7 +9,10 @@ class ApplicationController < ActionController::Base
   
   def user_is_the_one_who_is_logged_in
     if !current_user.blank?
-      @user = current_user      
+      @user = current_user
+      @history_count = @user.entries_count('h' , nil)
+      @star_count = @user.entries_count('s' , nil)
+      @to_read_count = @user.entries_count('r', nil)
     end
   end
    

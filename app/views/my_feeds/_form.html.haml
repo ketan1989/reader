@@ -1,0 +1,10 @@
+= simple_form_for([@user, @my_feed], html: {class: 'form-vertical'}) do |f|
+  = f.error_notification
+  .form-inputs
+    = f.input :user_id, as: :hidden, input_html: {value: current_user.id}
+    = f.input :from_where, as: :hidden, input_html: {value: "from the ui, where else?"}
+    %table
+      %tr
+        %td= f.input :app_url, label: "RSS URL", input_html: {class: "field span4", rows: 1, autocomplete: :off, style: 'height: 20px;'}
+        %td &nbsp;&nbsp;&nbsp;&nbsp;
+        %td= f.button :submit, "Add", class: "btn btn-danger"

@@ -35,7 +35,7 @@ class DelayedJob < ActiveRecord::Base
   
   def user
     if !handler.to_s.index("akid: ").blank?
-      a = self.app_key
+      a = self.my_feed
       if !a.blank?
         return a.user
       end
@@ -52,14 +52,14 @@ class DelayedJob < ActiveRecord::Base
     end
   end
   
-  def app_key
+  def my_feed
     if !handler.to_s.index("akid: ").blank? or !handler.to_s.index("fhub: ").blank?
       a = handler.to_s.split("\n")
       if !a.blank?
         if !a[1].blank?
           akid = a[1].gsub("fhub: ", "").gsub("akid: ", "").gsub("'", "")
           if !akid.blank? and akid != "0" and akid.to_i != 0
-            return AppKey.find(akid.to_i)
+            return MyFeed.find(akid.to_i)
           end
         end
       end

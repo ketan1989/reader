@@ -11,44 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130608085245) do
-
-  create_table "app_key_users", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "app_key_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.string   "colour"
-    t.text     "categories"
-  end
-
-  create_table "app_keys", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "app"
-    t.text     "app_url"
-    t.text     "app_api_token"
-    t.string   "app_username"
-    t.string   "app_password"
-    t.string   "entity_name"
-    t.datetime "last_processed"
-    t.datetime "last_requested_processing"
-    t.string   "is_pending"
-    t.integer  "last_request_user_id"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-    t.text     "error_message"
-    t.text     "app_account_name"
-    t.integer  "dashboard_id"
-    t.string   "range"
-    t.string   "genre"
-    t.boolean  "is_advertisement"
-    t.datetime "rss_last_modified_at"
-    t.text     "categories"
-    t.text     "html_url"
-    t.string   "sort_id"
-    t.text     "favicon"
-    t.string   "colour"
-  end
+ActiveRecord::Schema.define(:version => 20130609060116) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -60,16 +23,6 @@ ActiveRecord::Schema.define(:version => 20130608085245) do
     t.string   "uid"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-  end
-
-  create_table "dashboards", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.string   "slug"
-    t.string   "genre"
   end
 
   create_table "delayed_jobs", :force => true do |t|
@@ -88,28 +41,33 @@ ActiveRecord::Schema.define(:version => 20130608085245) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
-  create_table "feed_entries", :force => true do |t|
-    t.integer  "app_key_id"
-    t.integer  "user_id"
+  create_table "entries", :force => true do |t|
+    t.integer  "feed_id"
     t.string   "name"
     t.text     "summary"
     t.text     "url"
     t.datetime "published_at"
     t.string   "guid"
-    t.boolean  "is_star"
-    t.boolean  "is_to_read"
-    t.datetime "last_clicked_on"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
-    t.text     "categories"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.string   "author"
     t.text     "content"
-    t.string   "current_star",    :default => "star0"
-    t.datetime "last_starred_at"
   end
 
-  create_table "feed_entry_users", :force => true do |t|
-    t.integer  "feed_entry_id"
+  create_table "feeds", :force => true do |t|
+    t.text     "app_url"
+    t.string   "entity_name"
+    t.datetime "last_processed"
+    t.datetime "last_requested_processing"
+    t.string   "is_pending"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.datetime "rss_last_modified_at"
+    t.text     "html_url"
+  end
+
+  create_table "my_entries", :force => true do |t|
+    t.integer  "entry_id"
     t.integer  "user_id"
     t.boolean  "is_star"
     t.boolean  "is_to_read"
@@ -119,14 +77,25 @@ ActiveRecord::Schema.define(:version => 20130608085245) do
     t.string   "current_star"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-    t.integer  "app_key_user_id"
+    t.integer  "my_feed_id"
+    t.datetime "published_at"
+  end
+
+  create_table "my_feeds", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "feed_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "colour"
+    t.text     "categories"
   end
 
   create_table "tag_entries", :force => true do |t|
-    t.integer  "app_key_id"
+    t.integer  "feed_id"
     t.integer  "tag_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "my_feed_id"
   end
 
   create_table "tags", :force => true do |t|
