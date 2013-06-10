@@ -33,7 +33,10 @@ class MyEntriesController < ApplicationController
 
   def show
     @feed_article.update_attributes(is_to_read: false, last_clicked_on: Time.now)
-    redirect_to @feed_article.url
+    respond_to do |format|
+      format.html
+      format.js { render template: 'users/show' }
+    end
   end
   
 

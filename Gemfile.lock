@@ -111,8 +111,15 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.2)
+    columnize (0.3.6)
     commonjs (0.2.6)
     curb (0.8.4)
+    debugger (1.6.0)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.2.0)
+      debugger-ruby_core_source (~> 1.2.1)
+    debugger-linecache (1.2.0)
+    debugger-ruby_core_source (1.2.2)
     delayed_job (3.0.5)
       activesupport (~> 3.0)
     delayed_job_active_record (0.3.3)
@@ -309,6 +316,7 @@ DEPENDENCIES
   carmen!
   carmen-rails!
   coffee-rails (~> 3.2.1)
+  debugger
   delayed_job_active_record (= 0.3.3)
   devise!
   exception_notification!
