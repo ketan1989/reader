@@ -78,8 +78,9 @@ RedFeed::Application.configure do
   GOOGLE_KEY = ENV['GOOGLE_KEY']
   GOOGLE_SECRET = ENV['GOOGLE_SECRET']
   
-  config.action_mailer.default_url_options = { :host => 'jarvis-bi.com' }
+  config.action_mailer.default_url_options = { :host => "reader.pykih.com" }
   config.middleware.use ExceptionNotifier,
+    email_prefix: "[Reader] ",
     exception_recipients: 'support@pykih.freshdesk.com',
     sender_address: %{jarvisbi@pykih.com},
     sections: ExceptionNotifier::Notifier.default_sections,
