@@ -34,12 +34,7 @@ class DelayedJob < ActiveRecord::Base
   end
   
   def user
-    if !handler.to_s.index("akid: ").blank?
-      a = self.my_feed
-      if !a.blank?
-        return a.user
-      end
-    elsif !handler.to_s.index("uid: ").blank?
+    if !handler.to_s.index("uid: ").blank?
       a = handler.to_s.split("\n")
       if !a.blank?
         if !a[1].blank?
@@ -54,6 +49,7 @@ class DelayedJob < ActiveRecord::Base
         end
       end
     end
+    return nil
   end
   
   def my_feed
