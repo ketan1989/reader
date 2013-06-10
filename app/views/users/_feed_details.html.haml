@@ -4,10 +4,10 @@
   - if f.id == @feed_article.id
     - if !@feed_article.content.blank?
       %br
-      = @feed_article.content.html_safe
+      = @feed_article.content.to_s.html_safe
     - elsif !@feed_article.summary.blank?
       %br
-      = @feed_article.summary.html_safe
+      = @feed_article.summary.to_s.html_safe
   %br
   %br
   %span{class: "st_facebook_hcount", "displayText"=>'Facebook', st_url: @feed_article.url, st_title: "pykih reader: #{@feed_article.name}", st_summary: @feed_article.summary, st_image: @feed_article.my_feed.favicon}
