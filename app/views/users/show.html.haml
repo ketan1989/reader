@@ -27,7 +27,7 @@
                           %a{href: user_path(current_user, :akid => r.id), style: "padding: 0px; margin: 0px;"}= image_tag r.favicon
                         %td &nbsp;&nbsp;
                         %td.span9.black
-                          %a{href: user_path(current_user, :akid => r.id), style: "padding: 0px; margin: 0px;"}= feed_name(@user, r)
+                          %a{href: user_path(current_user, :akid => r.id), style: "padding: 0px; margin: 0px;"}= feed_name(@user, r).html_safe
 
     - if !@without_tags.first.blank?
       %br
@@ -49,7 +49,7 @@
                     %a{href: user_path(current_user, :akid => r.id), style: "padding: 0px; margin: 0px;"}= image_tag r.favicon
                   %td &nbsp;&nbsp;
                   %td.span9.black
-                    %a{href: user_path(current_user, :akid => r.id), style: "padding: 0px; margin: 0px;"}= feed_name(@user, r)
+                    %a{href: user_path(current_user, :akid => r.id), style: "padding: 0px; margin: 0px;"}= feed_name(@user, r).html_safe
 
   .span9
     .right
@@ -84,7 +84,7 @@
                   #comments
                     %a{href: user_path(current_user, entry: f, anchor: f.id, :akid => @akid, r: @to_read, s: @is_star, h: @history)}
                       .comment-header
-                        = feed_title(f)
+                        = feed_title(f).html_safe
                     .comment-body{id: f.id}
                       - if !(@feed_article.blank? or (f.id != @feed_article.id and !@feed_article.blank?))
                         - if !f.name.blank?
