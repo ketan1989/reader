@@ -4,6 +4,7 @@ class MyFeed < ActiveRecord::Base
   #ACCESSORS
   attr_accessible :feed_id, :user_id, :colour, :categories
   
+  #TEMPORARY - NOT STORED IN DATABASE
   attr_accessible :app_url, :from_where
   attr_accessor :app_url, :from_where
   
@@ -16,8 +17,8 @@ class MyFeed < ActiveRecord::Base
   #NESTED 
   #VALIDATIONS
   validates :feed_id, presence: true, :if => :if_not_from_ui
-  validates :user_id, presence: true
-  validates :app_url, presence: true, :if => :if_from_ui
+  validates :user_id, presence: true  
+  validates :app_url, :format => URI::regexp(%w(http https)), :if => :if_from_ui, :presence => true, :if => :if_from_ui, :length => { :minimum => 11}, :if => :if_from_ui
   validate  :no_duplicate_accounts_please, :on => :create
   
   #CALLBACKS  
@@ -33,9 +34,6 @@ class MyFeed < ActiveRecord::Base
   end
   
   def self.create_and_save(akid, uid, cat)
-    if akid.blank?
-      dfldknfdlknf
-    end
     a = MyFeed.where(feed_id: akid, user_id: uid).first
     if a.blank?
       a = MyFeed.new(feed_id: akid, user_id: uid)
@@ -46,9 +44,6 @@ class MyFeed < ActiveRecord::Base
   end
   
   def create_and_save_self
-    if self.feed_id.blank?
-      dfldknfdlknf2
-    end
     a = MyFeed.where(feed_id: self.feed_id, user_id: self.user_id).first
     if a.blank?
       self.save
@@ -73,6 +68,14 @@ class MyFeed < ActiveRecord::Base
   def no_duplicate_accounts_please
     a = MyFeed.where(feed_id: self.feed_id, user_id: self.user_id).first
     errors.add(:app_url, "duplicate RSS url") if !a.blank?
+    if !self.app_url.blank?
+      self.app_url = Ref::Feed.sanitise_url(self.app_url)
+      feed_obj = Ref::Feed.where(app_url: self.app_url).first
+      if !feed_obj.blank?
+        a = MyFeed.where(feed_id: feed_obj.id, user_id: self.user_id).first
+        errors.add(:app_url, "duplicate RSS url") if !a.blank?
+      end
+    end
     true
   end
   

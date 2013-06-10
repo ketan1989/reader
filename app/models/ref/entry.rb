@@ -17,21 +17,6 @@ class Ref::Entry < ActiveRecord::Base
   #SCOPES
   #CUSTOM SCOPES  
   #OTHER METHODS
-  
-  def self.add_entries(ak, entries)
-    entries.each do |entry|
-      a = Ref::Entry.where(feed_id: ak.id, guid: entry.id).first
-      if a.blank?
-        a = Ref::Entry.new(feed_id: ak.id, guid: entry.id, name: entry.title, summary: entry.summary, content: entry.content, url: entry.url, published_at: entry.published.blank? ? Time.now : entry.published, author: entry.author)
-        a.save
-      end
-      ak.my_feeds.each do |my_f|
-        feu = MyEntry.create_and_save(my_f.id, my_f.user_id, a.id)
-        feu.update_attributes(categories: entry.categories)
-      end
-    end
-  end
-  
   #PRIVATE
   private
   

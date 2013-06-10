@@ -64,8 +64,8 @@ class MyEntry < ActiveRecord::Base
     f = MyEntry.where(user_id: uid, entry_id: feid, my_feed_id: akuid).first
     if f.blank?
       f = MyEntry.new(user_id: uid, entry_id: feid, my_feed_id: akuid)
+      f.save
     end
-    f.save
     return f
   end
   
@@ -78,11 +78,13 @@ class MyEntry < ActiveRecord::Base
   
   def before_create_set
     self.published_at = self.entry.published_at
+    true
   end
   
   def before_save_set
     self.current_star = "star0" if self.current_star.blank?
     self.is_star = false        if self.current_star == "star0"
+    true
   end
   
 end

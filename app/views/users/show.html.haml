@@ -13,7 +13,7 @@
               - apps.each do |rr|
                 - r = rr.my_feed
                 - if !r.blank?
-                  %li{class: @akid == r.id.to_s ? "active" : nil}
+                  %li.f11{class: @akid == r.id.to_s ? "active" : nil}
                     %table
                       %tr
                         %td.span1

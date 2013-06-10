@@ -11,7 +11,7 @@ class Ref::Feed < ActiveRecord::Base
   has_many    :my_feeds, dependent: :destroy
   
   #VALIDATIONS
-  validates :app_url, :format => URI::regexp(%w(http https)), :presence => true
+  validates :app_url, :format => URI::regexp(%w(http https)), :presence => true, :uniqueness => { case_sensitive: false }, :length => { :minimum => 11 }
   
   #CALLBACKS
   before_create :before_create_set
@@ -23,17 +23,29 @@ class Ref::Feed < ActiveRecord::Base
     
   def self.import(u, a_json)
     a_json.each do |t|
-      url_u = t[0].gsub("feed/http://", "http://")
-      feed_exists = Ref::Feed.create_and_save(url_u, t[1], t[2])
+      url_u = Ref::Feed.sanitise_url(t[0])
+      feed_exists = Ref::Feed.where(app_url: url_u).first
+      if feed_exists.blank?
+        feed_exists = Ref::Feed.new(app_url: url_u, entity_name: t[1], html_url: t[2])
+        feed_exists.save
+        exists = false
+      else
+        exists = true
+      end
       if !feed_exists.blank?
-        my_feed = MyFeed.create_and_save(feed_exists.id, u.id, t[3])
-        if !t[5].blank?
-          if !t[5].first.blank?
-            t[5].each do |t_g|
-              tag_o = u.tags.where(name: t_g).first
-              if !tag_o.blank?
-                TagEntry.import(my_feed.id, tag_o.id)
-              end              
+        if !feed_exists.id.blank?
+          my_feed = MyFeed.create_and_save(feed_exists.id, u.id, t[3])
+          if exists
+            Delayed::Job.enqueue Job::Dj2.new(my_feed.id, u.id)
+          end
+          if !t[5].blank?
+            if !t[5].first.blank?
+              t[5].each do |t_g|
+                tag_o = u.tags.where(name: t_g).first
+                if !tag_o.blank?
+                  TagEntry.import(my_feed.id, tag_o.id)
+                end              
+              end
             end
           end
         end
@@ -41,17 +53,15 @@ class Ref::Feed < ActiveRecord::Base
     end
   end
   
-  def self.create_and_save(u, e, h)
-    feed_exists = Ref::Feed.where(app_url: u).first
-    if feed_exists.blank?
-      feed_exists = Ref::Feed.new(app_url: u, entity_name: e, html_url: h)
-      feed_exists.save
-    end
-    return feed_exists
-  end
-  
   def to_s
     self.entity_name
+  end
+  
+  def self.sanitise_url(a)
+    if !a.blank?
+      return a.gsub("feed/http://", "http://").gsub("feed/https://", "http://").gsub("https://", "http://")
+    end
+    return a
   end
       
   #JOBS
@@ -65,6 +75,7 @@ class Ref::Feed < ActiveRecord::Base
   end
   
   def before_create_set
+    self.app_url = Ref::Feed.sanitise_url(self.app_url)
     self.entity_name = URI(self.app_url).host if self.entity_name.blank?
   	self.last_requested_processing = Time.now
   	self.last_processed = nil

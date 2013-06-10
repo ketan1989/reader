@@ -34,6 +34,7 @@ class UsersController < ApplicationController
     if !params[:entry].blank?
       @feed_article = MyEntry.find(params[:entry])
       @feed_article.update_attributes(is_to_read: false, last_clicked_on: Time.now)
+      @history_count = @user.entries_count('h' , nil)
     end
     @is_star = params[:s]
     @history = params[:h]

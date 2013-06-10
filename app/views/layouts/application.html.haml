@@ -9,8 +9,6 @@
     %meta{ "http-equiv"=>"content-type", :content => "text/html; charset=ISO-8859-1"}
     %meta{name: "keywords", content: "google reader replacement, Google Reader substitute, Google Reader alternative, Google Reader"}
     %meta{name: "description", content: "pykih reader is an open source feed reader aimed at being a community owned and community developed feed reading & sharing platform."}
-    - if !current_user.blank?
-      = render partial: "layouts/sharethis"
   %body.all
     .container
       .row
@@ -43,7 +41,11 @@
       .row
         .span12= render partial: "layouts/shared/messages"
       = yield
-      - if !current_user.blank?
-        .row= render partial: "layouts/shared/footer"
+      .row
+        .span12
+          .right.f11{style: "color: gray;"} Built and managed by #{link_to "Pykih Software LLP", "http://www.pykih.com", style: "color: gray;", target: "_blank"}
+          %br
 - if current_user.blank?
   = render partial: "layouts/ga"
+- if !current_user.blank?
+  = render partial: "layouts/sharethis"  
