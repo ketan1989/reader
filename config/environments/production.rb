@@ -74,6 +74,7 @@ RedFeed::Application.configure do
   STATIC_WEBSITE = "http://reader.pykih.com"
   REDIRECTING_URL = "http://reader.pykih.com"
   
+  # Note: These keys have been taken from ritvij.j@gmail.com's API console
   GOOGLE_KEY = ENV['GOOGLE_KEY']
   GOOGLE_SECRET = ENV['GOOGLE_SECRET']
   
