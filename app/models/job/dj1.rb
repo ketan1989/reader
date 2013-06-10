@@ -32,9 +32,11 @@ class Job::Dj1 < Struct.new(:akid)
                 a.save
               end
             end
-            ak.my_feeds.each do |my_f|
-              ak.entries.each do |article|
-                MyEntry.create_and_save(my_f.id, my_f.user_id, article.id)
+            if !ak.my_feeds.first.blank?
+              ak.my_feeds.each do |my_f|
+                ak.entries.each do |article|
+                  MyEntry.create_and_save(my_f.id, my_f.user_id, article.id)
+                end
               end
             end
           end

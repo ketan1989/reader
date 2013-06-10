@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130609123546) do
+ActiveRecord::Schema.define(:version => 20130610093711) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -43,14 +43,14 @@ ActiveRecord::Schema.define(:version => 20130609123546) do
 
   create_table "entries", :force => true do |t|
     t.integer  "feed_id"
-    t.string   "name"
+    t.text     "name"
     t.text     "summary"
     t.text     "url"
     t.datetime "published_at"
-    t.string   "guid"
+    t.text     "guid"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
-    t.string   "author"
+    t.text     "author"
     t.text     "content"
   end
 
