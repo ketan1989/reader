@@ -1,0 +1,14 @@
+- if !(@feed_article.blank? or (f.id != @feed_article.id and !@feed_article.blank?))
+  - if !f.name.blank?
+    %h3= link_to f.name, user_my_entry_path(current_user, f), target: "_blank", class: "red"
+  - if f.id == @feed_article.id
+    - if !@feed_article.content.blank?
+      %br
+      = @feed_article.content.to_s.html_safe
+    - elsif !@feed_article.summary.blank?
+      %br
+      = @feed_article.summary.to_s.html_safe
+  %br
+  %br
+  %span{class: "st_facebook_hcount", "displayText"=>'Facebook', st_url: @feed_article.url, st_title: "pykih reader: #{@feed_article.name}", st_summary: @feed_article.summary, st_image: @feed_article.my_feed.favicon}
+  %span{class: "st_twitter_hcount", "displayText"=>'Tweet', st_url: @feed_article.url, st_title: @feed_article.name, st_summary: @feed_article.summary, st_image: @feed_article.my_feed.favicon, st_via: "pykih"}

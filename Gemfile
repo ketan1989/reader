@@ -57,4 +57,5 @@ gem 'nokogiri', '1.5.3'
 # development
 group :development do
   gem 'awesome_print'
+  gem 'debugger'
 end
