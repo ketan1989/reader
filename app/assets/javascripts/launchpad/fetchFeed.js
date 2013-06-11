@@ -1,5 +1,5 @@
 $(function(){
-  $('.fetchFeed').click(function(){
+  $(document).on("click", ".fetchFeed", function(){
     id = $(this).attr('id');
     user_id = $(this).attr('user');
 
