@@ -1,6 +1,17 @@
 <% if @feed_article.present? %>
   $('a#<%= @feed_article.id %>.fetchFeed').next().html('<%=j render partial: "users/feed_details", locals: { f: @feed_article } %>');
-  $('a#<%= @feed_article.id %>.fetchFeed').next().css('display', 'block');
+  // Hide the open block 
+  open_feed_block = $('div.comment-body.show').first()
+  open_feed_block.removeClass('show');
+  open_feed_block.addClass('hide');
+
+  // Open the clicked feed block
+  $('a#<%= @feed_article.id %>.fetchFeed').next().removeClass('hide');
+  $('a#<%= @feed_article.id %>.fetchFeed').next().addClass('show');
+
+  // Change the strip color => Read the feed
   $('ul.feed li#<%= @feed_article.id %>').css('background-color', '#EAEAEA');
+
+  // Update History count
   $('ul#feed_status li#history_feeds').html('<%= link_to "History (#{@history_count})", user_path(current_user, :h => true) %>');
 <% end %>
