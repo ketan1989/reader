@@ -16,7 +16,6 @@ body {margin-top: 90px;}
   overflow: auto;
   height: 600px;
   position: fixed;
-  margin-left: 0;
   left: 30px;
   top: 115px;
   z-index: 1;
