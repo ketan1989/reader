@@ -57,8 +57,8 @@ stars/star9.png: stars/star9-9fb14341de0ee612074ff45e0525b9cc.png
 stars/star9/index.png: stars/star9-9fb14341de0ee612074ff45e0525b9cc.png
 top.png: top-593e8f6642700ad66b5f1bb2bdddd4be.png
 top/index.png: top-593e8f6642700ad66b5f1bb2bdddd4be.png
-application.js: application-8327feaaaf782fcf3fd71241cba536ed.js
-application/index.js: application-8327feaaaf782fcf3fd71241cba536ed.js
+application.js: application-b9e3c49b49a089a7b24eeafbb3620738.js
+application/index.js: application-b9e3c49b49a089a7b24eeafbb3620738.js
 application.css: application-08f4f415445d8702e6b44d6dfac82033.css
 application/index.css: application-08f4f415445d8702e6b44d6dfac82033.css
 jquery.min.map: jquery.min-8b58c0fbf303b938d8e749262f7e50dd.map
