@@ -27,7 +27,8 @@
                           %a{href: user_path(current_user, :akid => r.id), style: "padding: 0px; margin: 0px;"}= image_tag r.favicon
                         %td &nbsp;&nbsp;
                         %td.span9.black
-                          %a{href: user_path(current_user, :akid => r.id), style: "padding: 0px; margin: 0px;"}= feed_name(@user, r).html_safe
+                          - if !feed_name(@user, r).blank?
+                            %a{href: user_path(current_user, :akid => r.id), style: "padding: 0px; margin: 0px;"}= feed_name(@user, r).html_safe
 
     - if !@without_tags.first.blank?
       %br
@@ -49,7 +50,8 @@
                     %a{href: user_path(current_user, :akid => r.id), style: "padding: 0px; margin: 0px;"}= image_tag r.favicon
                   %td &nbsp;&nbsp;
                   %td.span9.black
-                    %a{href: user_path(current_user, :akid => r.id), style: "padding: 0px; margin: 0px;"}= feed_name(@user, r).html_safe
+                    - if !feed_name(@user, r).blank?
+                      %a{href: user_path(current_user, :akid => r.id), style: "padding: 0px; margin: 0px;"}= feed_name(@user, r).html_safe
 
   .span9
     .right
