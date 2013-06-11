@@ -30,7 +30,7 @@
             %ul.nav.nav-pills{id: "feed_status"}
               %li{id: "marked_to_read_feeds", class: @to_read.blank? ? nil : "active"}= link_to "To Read (#{@to_read_count})", user_path(current_user, :r => true)
               %li{id: "starred_feeds", class: @is_star.blank? ? nil : "active"}= link_to "Stared (#{@star_count})", user_path(current_user, :s => true)
-              %li{class: @history.blank? ? nil : "active"}= link_to "History (#{@history_count})", user_path(current_user, :h => true)
+              %li{id: "history_feeds", class: @history.blank? ? nil : "active"}= link_to "History (#{@history_count})", user_path(current_user, :h => true)
               %li= link_to "Sign Out".html_safe, sign_out_path
           - else
             %ul.nav.nav-pills

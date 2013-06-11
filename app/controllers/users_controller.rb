@@ -42,15 +42,20 @@ class UsersController < ApplicationController
     @akid = params[:akid]
     @home = (params[:r].blank? and params[:h].blank? and params[:s].blank? and params[:akid].blank?) ? true : false 
     if !params[:h].blank?
-      @entries = MyEntry.read.by_user(@user).page(params[:page]).per(50)
+      @entries = MyEntry.read.by_user(@user).page(params[:page]).per(User::PER_PAGE)
     elsif !params[:r].blank?
-      @entries = MyEntry.to_read.by_user(@user).page(params[:page]).per(50)
+      @entries = MyEntry.to_read.by_user(@user).page(params[:page]).per(User::PER_PAGE)
     elsif !params[:s].blank?
-      @entries = MyEntry.star.by_user(@user).page(params[:page]).per(50)
+      @entries = MyEntry.star.by_user(@user).page(params[:page]).per(User::PER_PAGE)
     elsif !params[:akid].blank?
-      @entries = MyEntry.where("my_entries.my_feed_id = ?", params[:akid]).page(params[:page]).per(50)
+      @entries = MyEntry.where("my_entries.my_feed_id = ?", params[:akid]).page(params[:page]).per(User::PER_PAGE)
     else
-      @entries = MyEntry.by_user(@user).page(params[:page]).per(50)
+      @entries = MyEntry.by_user(@user).page(params[:page]).per(User::PER_PAGE)
+    end
+
+    respond_to do |format|
+      format.html
+      format.js { render template: 'users/show' }
     end
   end
     

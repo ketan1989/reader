@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
 
+  # Constants
+  PER_PAGE = 10
+
   #GEMS USED
   extend FriendlyId
   friendly_id :username, use: :slugged

@@ -1,5 +1,1 @@
-<% if @feed_article.present? %>
-  $('a#<%= @feed_article.id %>.fetchFeed').next().html('<%=j render partial: "users/feed_details", locals: { f: @feed_article } %>');
-  $('a#<%= @feed_article.id %>.fetchFeed').next().css('display', 'block');
-  $('ul.feed li#<%= @feed_article.id %>').css('background-color', '#EAEAEA');
-<% end %>
+$('ul.feed').append('<%=j render partial: "feeds", collection: @entries, as: :f %>');

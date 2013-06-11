@@ -1,0 +1,6 @@
+<% if @feed_article.present? %>
+  $('a#<%= @feed_article.id %>.fetchFeed').next().html('<%=j render partial: "users/feed_details", locals: { f: @feed_article } %>');
+  $('a#<%= @feed_article.id %>.fetchFeed').next().css('display', 'block');
+  $('ul.feed li#<%= @feed_article.id %>').css('background-color', '#EAEAEA');
+  $('ul#feed_status li#history_feeds').html('<%= link_to "History (#{@history_count})", user_path(current_user, :h => true) %>');
+<% end %>

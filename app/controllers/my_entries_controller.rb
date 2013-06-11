@@ -36,7 +36,7 @@ class MyEntriesController < ApplicationController
     @history_count = @user.entries_count('h' , nil)
     respond_to do |format|
       format.html
-      format.js { render template: 'users/show' }
+      format.js { render template: 'my_entries/show' }
     end
   end
   
