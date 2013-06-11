@@ -1,5 +1,5 @@
-.row
-  .span3{style: "height: 600px; overflow-y: scroll; "}
+%row{class: "row marginT115"}
+  %div{class: "span3", id: "leftPanel"}
     = link_to "All Feeds (#{@total_subscriptions})", user_path(current_user), style: @home.blank? ? "color: black;" : "font-weight: bold; color: black;"
     %br
     - if !@tags.first.blank?
@@ -53,7 +53,7 @@
                     - if !feed_name(@user, r).blank?
                       %a{href: user_path(current_user, :akid => r.id), style: "padding: 0px; margin: 0px;"}= feed_name(@user, r).html_safe
 
-  .span9
+  %div{class: "span9", id: "feedsHolder"}
     .right
       - if current_user.is_admin?
         = link_to "Admin", admin_user_path(current_user), class: "red"

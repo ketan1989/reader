@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
   # Constants
-  PER_PAGE = 10
+  PER_PAGE = 25
 
   #GEMS USED
   extend FriendlyId

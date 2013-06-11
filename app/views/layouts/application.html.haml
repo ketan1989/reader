@@ -10,32 +10,31 @@
     %meta{name: "keywords", content: "google reader replacement, Google Reader substitute, Google Reader alternative, Google Reader"}
     %meta{name: "description", content: "pykih reader is an open source feed reader aimed at being a community owned and community developed feed reading & sharing platform."}
   %body.all
-    .container
-      .row
-        .span12.f11.right
-          This is a community owned, 
-          = link_to "open-source", "https://github.com/pykih/reader", target: "_blank", style: "color: blue;"
-          project. To contribute, 
-          = mail_to "rp@pykih.com", "contact us."
-    .container
-      .row
-        .span3
-          %div{style: "padding-top: 10px;"}= link_to image_tag("logo.png"), root_url
-          %br
-          %br
-        .span4
-          %br
-        .span5.f11.right
-          - if !current_user.blank?
-            %ul.nav.nav-pills{id: "feed_status"}
-              %li{id: "marked_to_read_feeds", class: @to_read.blank? ? nil : "active"}= link_to "To Read (#{@to_read_count})", user_path(current_user, :r => true)
-              %li{id: "starred_feeds", class: @is_star.blank? ? nil : "active"}= link_to "Stared (#{@star_count})", user_path(current_user, :s => true)
-              %li{id: "history_feeds", class: @history.blank? ? nil : "active"}= link_to "History (#{@history_count})", user_path(current_user, :h => true)
-              %li= link_to "Sign Out".html_safe, sign_out_path
-          - else
-            %ul.nav.nav-pills
-              %li{class: (action_name == "developer") ? "active" : nil}= link_to "Developer", developer_path, style: "text-decoration: none;"
-              %li{class: (action_name == "about") ? "active" : nil}= link_to "About", about_path, style: "text-decoration: none;"
+    %div{class: "mainHeader"}
+      .container
+        .row
+          .span12.f11.right
+            This is a community owned, 
+            = link_to "open-source", "https://github.com/pykih/reader", target: "_blank", style: "color: blue;"
+            project. To contribute, 
+            = mail_to "rp@pykih.com", "contact us."
+      .container
+        .row
+          .span3
+            %div{style: "padding-top: 10px;"}= link_to image_tag("logo.png"), root_url
+          .span4
+            %br
+          .span5.f11.right
+            - if !current_user.blank?
+              %ul.nav.nav-pills{id: "feed_status"}
+                %li{id: "marked_to_read_feeds", class: @to_read.blank? ? nil : "active"}= link_to "To Read (#{@to_read_count})", user_path(current_user, :r => true)
+                %li{id: "starred_feeds", class: @is_star.blank? ? nil : "active"}= link_to "Stared (#{@star_count})", user_path(current_user, :s => true)
+                %li{id: "history_feeds", class: @history.blank? ? nil : "active"}= link_to "History (#{@history_count})", user_path(current_user, :h => true)
+                %li= link_to "Sign Out".html_safe, sign_out_path
+            - else
+              %ul.nav.nav-pills
+                %li{class: (action_name == "developer") ? "active" : nil}= link_to "Developer", developer_path, style: "text-decoration: none;"
+                %li{class: (action_name == "about") ? "active" : nil}= link_to "About", about_path, style: "text-decoration: none;"
     .container
       .row
         .span12= render partial: "layouts/shared/messages"
@@ -47,4 +46,4 @@
 - if current_user.blank?
   = render partial: "layouts/ga"
 - if !current_user.blank?
-  = render partial: "layouts/sharethis"  
+  = render partial: "layouts/sharethis"

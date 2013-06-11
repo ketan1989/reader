@@ -35,7 +35,7 @@ class MyEntriesController < ApplicationController
     @feed_article.update_attributes(is_to_read: false, last_clicked_on: Time.now)
     @history_count = @user.entries_count('h' , nil)
     respond_to do |format|
-      format.html
+      format.html { redirect_to @feed_article.url }
       format.js { render template: 'my_entries/show' }
     end
   end
